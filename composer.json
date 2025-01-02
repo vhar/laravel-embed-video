@@ -1,0 +1,49 @@
+{
+    "name": "vhar/laravel-embed-video",
+    "description": "Laravel Embed Video is a package for create a URL for an embedded video and a URL for a cover image from various video hosting sites from a video URL in any format",
+    "keywords": [
+        "php",
+        "laravel",
+        "embed video",
+        "youtube",
+        "vk video",
+        "rutube"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vladimir Kharinenkov",
+            "email": "vhar@mail.ru"
+        }
+    ],
+    "require": {
+        "php": "^8.3.0",
+        "illuminate/http": "^10.0|^11.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0|^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vhar\\LaravelEmbedVideo\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Vhar\\LaravelEmbedVideo\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Vhar\\LaravelEmbedVideo\\Providers\\EmbedVideoServiceProvider"
+            ],
+            "aliases": {
+                "videohosting": "Vhar\\LaravelEmbedVideo\\Facades\\VideoHosting",
+                "embedvideo": "Vhar\\LaravelEmbedVideo\\Facades\\EmbedVideo"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
