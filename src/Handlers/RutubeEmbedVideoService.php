@@ -6,14 +6,14 @@ use Illuminate\Support\Facades\Http;
 use Vhar\LaravelEmbedVideo\Contracts\EmbedVideoContract;
 use Vhar\LaravelEmbedVideo\EmbedData;
 
-class RutubeEmbedVideoService implements EmbedVideoContract 
+class RutubeEmbedVideoService implements EmbedVideoContract
 {
     /**
      * Rutube url handler
      * 
      * @param string $url
      * 
-     * @return array
+     * @return EmbedData
      * 
      * @throws \InvalidArgumentException
      * @throws \Illuminate\Http\Client\RequestException
@@ -32,10 +32,10 @@ class RutubeEmbedVideoService implements EmbedVideoContract
         if (!in_array($parts['host'], $this->allowedDomains())) {
             throw new \InvalidArgumentException("The argument is not valid URL-address to a Rutube video.");
         }
-        
+
         $path = explode('/', ltrim($parts['path'], '/'));
 
-        switch($path[0]) {
+        switch ($path[0]) {
             case 'video':
                 if ($path[1] === 'private') {
                     $id = $path[2];

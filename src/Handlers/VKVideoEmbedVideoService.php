@@ -13,7 +13,7 @@ class VKVideoEmbedVideoService implements EmbedVideoContract
      * 
      * @param string $url
      * 
-     * @return array
+     * @return EmbedData
      * 
      * @throws \InvalidArgumentException
      * @throws \Illuminate\Http\Client\RequestException
@@ -46,7 +46,7 @@ class VKVideoEmbedVideoService implements EmbedVideoContract
                 'hash' => $part[3] ?? null
             ];
         }
-        
+
         $id =  $path['oid'] . '_' . $path['id'];
         $video = 'https://vk.com/video_ext.php?oid=' . $path['oid'] . '&id=' . $path['id'];
 
@@ -93,16 +93,16 @@ class VKVideoEmbedVideoService implements EmbedVideoContract
 
         $doc = new \DOMDocument();
         @$doc->loadHTML($body);
-        
+
         $xpath = new \DOMXpath($doc);
-        
+
         $node = $xpath->query('//*[contains(@class, "video_box_msg_background")]');
 
         if ($node[0]) {
             $style = $node[0]->getAttribute('style');
-        
+
             preg_match("/background-image:url\((.*)\)/", $style, $matches);
-            
+
             $img = $matches[1] ?? '';
         }
 

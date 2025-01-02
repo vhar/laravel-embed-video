@@ -1,4 +1,5 @@
 <?php
+
 namespace Vhar\LaravelEmbedVideo\Facades;
 
 use Illuminate\Support\Facades\Facade;

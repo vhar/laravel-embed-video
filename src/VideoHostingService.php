@@ -15,8 +15,9 @@ class VideoHostingService
     /**
      * Register a class-based component alias directive.
      *
-     * @param  string $class
-     * @param  string $alias
+     * @param string $class
+     * @param string $alias
+     * 
      * @return void
      */
     public function hosting(string $alias, string $class)
@@ -41,6 +42,8 @@ class VideoHostingService
     /**
      * Get the video hosting handler class by alias.
      *
+     * @param string $alias
+     * 
      * @return string|null
      */
     public function getClassHostingAlias(string $alias)

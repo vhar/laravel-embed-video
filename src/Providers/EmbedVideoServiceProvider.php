@@ -1,4 +1,5 @@
 <?php
+
 namespace Vhar\LaravelEmbedVideo\Providers;
 
 use Illuminate\Support\ServiceProvider;
@@ -45,7 +46,7 @@ class EmbedVideoServiceProvider extends ServiceProvider
      * @return void
      */
     public function registerVideoHosting()
-    {        
+    {
         $this->app->singleton('videohosting', function () {
             return new VideoHostingService();
         });

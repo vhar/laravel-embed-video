@@ -13,7 +13,7 @@ class YouTubeEmbedVideoService implements EmbedVideoContract
      * 
      * @param string $url
      * 
-     * @return array
+     * @return EmbedData
      * 
      * @throws \InvalidArgumentException
      * @throws \Illuminate\Http\Client\RequestException
@@ -25,7 +25,7 @@ class YouTubeEmbedVideoService implements EmbedVideoContract
         }
 
         Http::get($url)->throwUnlessStatus(200);
-        
+
         $parts = parse_url($url);
         $parts['host'] = str_replace('www.', '', $parts['host']);
 
@@ -37,10 +37,10 @@ class YouTubeEmbedVideoService implements EmbedVideoContract
 
         if ($parts['host'] === 'youtu.be') {
             $id = ltrim($parts['path'], '/');
-        } elseif($parts['host'] === 'youtube.com') {
+        } elseif ($parts['host'] === 'youtube.com') {
             $path = explode('/', ltrim($parts['path'], '/'));
 
-            switch($path[0]) {
+            switch ($path[0]) {
                 case 'watch':
                     parse_str($parts['query'], $query);
                     $id = $query['v'] ?? 'f';

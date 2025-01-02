@@ -1,11 +1,11 @@
 <?php
+
 namespace Vhar\LaravelEmbedVideo\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 
 /**
- * 
  * @method static \Vhar\LaravelEmbedVideo\Contracts\EmbedVideoContract hosting(string $alias)
  * @method statig array handle(string $url)
  * 

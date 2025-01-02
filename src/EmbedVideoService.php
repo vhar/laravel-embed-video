@@ -35,7 +35,7 @@ class EmbedVideoService
     }
 
     /**
-     * @param string $methodEmbedVideoContract
+     * @param string $method
      * @param array $args
      * 
      * @return \Vhar\LaravelEmbedVideo\Contracts\EmbedVideoContract
@@ -43,7 +43,7 @@ class EmbedVideoService
      * @throws \InvalidArgumentException
      */
     public function __call(string $method, array $args)
-    {   
+    {
         $domain = parse_url($args[0], PHP_URL_HOST);
 
         if (is_null($domain)) {
@@ -75,7 +75,7 @@ class EmbedVideoService
         foreach ($handlers as $alias => $handler) {
             $hosting = new $handler;
 
-            if (in_array($domain , $hosting->allowedDomains())) {
+            if (in_array($domain, $hosting->allowedDomains())) {
                 return $alias;
             }
         }
