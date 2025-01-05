@@ -87,8 +87,10 @@ VK_VIDEO=''
 ```php
 public function handle(string $url): EmbedData
 {
-    ...    
-    return EmbedData::create($id, $embedURL, $coverURL);
+    ...
+    $data = new EmbedData();
+
+    return $data->setId($id)->setVideo($embedURL)->setCover($coverURL);
 }
 ``` 
 

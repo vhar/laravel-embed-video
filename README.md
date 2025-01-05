@@ -87,8 +87,9 @@ In the `handle` method, create the code to handle the URL string. This method sh
 public function handle(string $url): EmbedData
 {
     ...    
-    return EmbedData::create($id, $embedURL, $coverURL);
-}
+    $data = new EmbedData();
+
+    return $data->setId($id)->setVideo($embedURL)->setCover($coverURL);}
 ``` 
 
 The `availableDomains` method must return an array with the hosting domain names for this handler.  

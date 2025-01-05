@@ -21,7 +21,7 @@ class RutubeEmbedVideoService implements EmbedVideoContract
     public function handle(string $url): EmbedData
     {
         if (filter_var($url, FILTER_VALIDATE_URL) === false) {
-            throw new \InvalidArgumentException("The argument must be a URL.");
+            throw new \InvalidArgumentException("The argument must be a URL string.");
         }
 
         Http::get($url)->throwUnlessStatus(200);
@@ -55,7 +55,9 @@ class RutubeEmbedVideoService implements EmbedVideoContract
 
         $cover = $this->getCover($url);
 
-        return EmbedData::create($id, $video, $cover);
+        $data = new EmbedData();
+
+        return $data->setId($id)->setVideo($video)->setCover($cover);
     }
 
     /**

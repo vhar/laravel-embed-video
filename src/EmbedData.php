@@ -4,37 +4,53 @@ namespace Vhar\LaravelEmbedVideo;
 
 readonly final class EmbedData
 {
-    /**
-     * @param string $id
-     * @param string $video
-     * @param string $cover
-     */
-    private function __construct(
-        public string $id,
-        public string $video,
-        public string $cover,
-    ) 
-    {
-        //
-    }
+    public string $id;
+    public string $video;
+    public string $cover;
 
     /**
      * @param string $id video ID on hosting
-     * @param string $video URL to embedded video 
-     * @param string $cover URL to cover image
      * 
      * @return \Vhar\LaravelEmbedVideo\EmbedData
      */
-    public static function create(
-        string $id,
-        string $video,
-        string $cover,
-    ): EmbedData
+    public function setId(string $id): EmbedData
     {
-        return new EmbedData(
-            $id,
-            $video,
-            $cover,
-        );
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @param string $url URL to embedded video 
+     * 
+     * @return \Vhar\LaravelEmbedVideo\EmbedData
+     * @throws \InvalidArgumentException
+     */
+    public function setVideo(string $url): EmbedData
+    {
+        if (filter_var($url, FILTER_VALIDATE_URL)) {
+            $this->video = $url;
+        } else {
+            throw new \InvalidArgumentException("The argument must be a URL string.");
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $url URL to cover image
+     * 
+     * @return \Vhar\LaravelEmbedVideo\EmbedData
+     * @throws \InvalidArgumentException
+     */
+    public function setCover(string $url): EmbedData
+    {
+        if (filter_var($url, FILTER_VALIDATE_URL)) {
+            $this->cover = $url;
+        } else {
+            throw new \InvalidArgumentException("The argument must be a URL string.");
+        }
+
+        return $this;
     }
 }
