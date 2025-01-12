@@ -37,7 +37,7 @@ class VKVideoEmbedVideoService implements EmbedVideoContract
             parse_str($parts['query'], $path);
         }
 
-        preg_match('/video(-?[0-9]+)\_([0-9]+)\_?([0-9a-f]+)?/', ($path['z'] ?? $parts['path']), $part);
+        preg_match('/[video|clip](-?[0-9]+)[_]([0-9]+)[_]?([0-9a-f]+)?/', ($path['z'] ?? $parts['path']), $part);
 
         if (!empty($part[1]) && !empty($part[2])) {
             $path = [
