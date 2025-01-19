@@ -48,7 +48,7 @@ class VKVideoEmbedVideoService implements EmbedVideoContract
         }
 
         $id =  $path['oid'] . '_' . $path['id'];
-        $video = 'https://vkvideo.ru/video_ext.php?oid=' . $path['oid'] . '&id=' . $path['id'];
+        $video = 'https://vk.com/video_ext.php?oid=' . $path['oid'] . '&id=' . $path['id'];
 
         if (!empty($path['hash'])) {
             $id .= '_' . $path['hash'];
