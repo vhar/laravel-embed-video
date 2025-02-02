@@ -33,27 +33,15 @@ class RutubeEmbedVideoService implements EmbedVideoContract
             throw new \InvalidArgumentException("The argument is not valid URL-address to a Rutube video.");
         }
 
-        $path = explode('/', ltrim($parts['path'], '/'));
+        $path = explode('/', trim($parts['path'], '/'));
+        $id = array_pop($path);
 
-        switch ($path[0]) {
-            case 'video':
-                if ($path[1] === 'private') {
-                    $id = $path[2];
-                } else {
-                    $id = $path[1];
-                }
-                break;
-            case 'play':
-                $id = $path[2];
-                break;
-            default:
-                $id = 'f';
-        }
+        $dataURL = sprintf("https://rutube.ru/api/video/%s/?format=json&%s", $id, $parts['query'] ?? '');
 
-        $video = 'https://rutube.ru/play/embed/' . $id;
-        $url = 'https://rutube.ru/video/' . $id;
+        $videoData = Http::get($dataURL)->throwUnlessStatus(200);
 
-        $cover = $this->getCover($url);
+        $video = $videoData->json('embed_url');
+        $cover = $videoData->json('thumbnail_url');
 
         $data = new EmbedData();
 
@@ -70,19 +58,5 @@ class RutubeEmbedVideoService implements EmbedVideoContract
         return [
             'rutube.ru',
         ];
-    }
-
-    /**
-     * Get a URL to a cover image
-     * 
-     * @param string $url
-     * 
-     * @return string
-     */
-    private function getCover(string $url): string
-    {
-        $img = Http::get('https://rutube.ru/api/oembed/?url=' . rtrim($url, '/') . '/&format=json')->json('thumbnail_url');
-
-        return $img ? strtok($img, '?') : '';
     }
 }
