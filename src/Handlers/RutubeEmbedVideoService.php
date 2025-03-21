@@ -24,8 +24,6 @@ class RutubeEmbedVideoService implements EmbedVideoContract
             throw new \InvalidArgumentException("The argument must be a URL string.");
         }
 
-        Http::get($url)->throwUnlessStatus(200);
-
         $parts = parse_url($url);
         $parts['host'] = str_replace('www.', '', $parts['host']);
 
