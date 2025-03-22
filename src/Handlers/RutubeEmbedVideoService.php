@@ -36,7 +36,11 @@ class RutubeEmbedVideoService implements EmbedVideoContract
 
         $dataURL = sprintf("https://rutube.ru/api/video/%s/?format=json&%s", $id, $parts['query'] ?? '');
 
-        $videoData = Http::get($dataURL)->throwUnlessStatus(200);
+        $videoData = Http::get($dataURL);
+
+        if ($videoData->status() !== 200) {
+            throw new HttpClientException(json_encode($videoData->json()));
+        }
 
         $video = $videoData->json('embed_url');
         $cover = $videoData->json('thumbnail_url');
