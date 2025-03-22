@@ -3,8 +3,9 @@
 namespace Vhar\LaravelEmbedVideo\Handlers;
 
 use Illuminate\Support\Facades\Http;
-use Vhar\LaravelEmbedVideo\Contracts\EmbedVideoContract;
 use Vhar\LaravelEmbedVideo\EmbedData;
+use Illuminate\Http\Client\HttpClientException;
+use Vhar\LaravelEmbedVideo\Contracts\EmbedVideoContract;
 
 class RutubeEmbedVideoService implements EmbedVideoContract
 {
@@ -16,7 +17,7 @@ class RutubeEmbedVideoService implements EmbedVideoContract
      * @return EmbedData
      * 
      * @throws \InvalidArgumentException
-     * @throws \Illuminate\Http\Client\RequestException
+     * @throws \Illuminate\Http\Client\HttpClientException;
      */
     public function handle(string $url): EmbedData
     {
